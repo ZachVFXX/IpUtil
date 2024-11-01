@@ -19,7 +19,6 @@ def get_hosts_path() -> str:
 
 class IpUtil(object):
     def __init__(self, LOOPBACK_IP: str = "127.0.0.1"):
-        # Define the loopback IP to block or unblock addresses
         self._LOOPBACK_IP = LOOPBACK_IP
 
     def is_ip_blocked(self, ip: str, lines: List[str] | None = None) -> bool:
