@@ -5,11 +5,14 @@ import logging
 from typing import Union, List
 import fire
 
-# Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 
 def get_hosts_path() -> str:
+    """
+    Get the path to the hosts file.
+    :return: The path to the hosts file.
+    """
     system = platform.system()
     return r"C:\Windows\System32\drivers\etc\hosts" if system == "Windows" else "/etc/hosts"
 
@@ -20,6 +23,14 @@ class IpUtil(object):
         self._LOOPBACK_IP = LOOPBACK_IP
 
     def is_ip_blocked(self, ip: str, lines: List[str] | None = None) -> bool:
+        """
+        Check if an IP address is blocked in the hosts file.
+        Args:
+            ip (str): The IP address to check.
+            lines (List[str], optional): The lines of the hosts file. Defaults to None.
+        Returns:
+            bool: True if the IP address is blocked, False otherwise.
+        """
         entry = f"{self._LOOPBACK_IP} {ip}"
         if lines is None:
             with open(get_hosts_path(), "r") as hosts_file:
@@ -27,6 +38,13 @@ class IpUtil(object):
         return any(entry in line for line in lines)
 
     def block_ip(self, target: Union[str, List[str]]) -> List[str]:
+        """
+        Block an IP address in the hosts file.
+        Args:
+            target (Union[str, List[str]]): The IP address or list of IP addresses to block.
+        Returns:
+            List[str]: A list of blocked IP addresses.
+        """
         if isinstance(target, str):
             target = [target]
 
@@ -49,6 +67,14 @@ class IpUtil(object):
         return blocked_ips
 
     def unblock_ip(self, list_of_target: Union[str, List[str]]) -> List[str]:
+        """
+        Unblock an IP address from the hosts file.
+
+        Args:
+            list_of_target (Union[str, List[str]]): The IP address or list of IP addresses to unblock.
+        Returns:
+            List[str]: A list of unblocked IP addresses.
+        """
         if isinstance(list_of_target, str):
             list_of_target = [list_of_target]
 
