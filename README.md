@@ -18,5 +18,5 @@ This Python script allows you to block and unblock IP addresses or domain names 
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/hosts-file-ip-blocker.git
-   cd hosts-file-ip-blocker
+   git https://github.com/ZachVFXX/IpUtil.git
+   cd IpUtil/src/
