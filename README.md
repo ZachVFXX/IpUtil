@@ -1,4 +1,4 @@
-# Hosts File IP Blocker
+# PyIpBlocker
 
 This Python script allows you to block and unblock IP addresses or domain names in the system's hosts file. It works by adding entries for specified IP addresses or domain names to redirect them to the loopback IP (127.0.0.1), effectively blocking them.
 
@@ -16,7 +16,6 @@ This Python script allows you to block and unblock IP addresses or domain names 
 
 ## Installation
 
-1. **Clone the repository**:
+1. **From pypi !**:
    ```bash
-   git https://github.com/ZachVFXX/IpUtil.git
-   cd IpUtil/src/
+   pip install PyIpBlocker
