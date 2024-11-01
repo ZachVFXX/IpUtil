@@ -20,5 +20,5 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/ZachVFXX/IpUtil/tree/main"
-Issues = "https://github.com/ZachVFXX/IpUtil/issues"
+Homepage = "https://github.com/ZachVFXX/PyIpBlocker/tree/main"
+Issues = "https://github.com/ZachVFXX/PyIpBlocker/issues"
