@@ -4,14 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "PyIpUtil"
-version = "0.0.2"
+version = "0.0.3"
 authors = [
   { name="ZachVFX", email="zachallrd@gmail.com" },
 ]
 description = "A small package for block and unblock ip in python, with a CLI in options."
 readme = "README.md"
 requires-python = ">=3.8"
-keywords = ["IpUtil", "Ip", "Block", "Unblock", "CLI"]
+keywords = ["IpUtil", "Ip", "Block", "Unblock", "CLI", "utility"]
 license = { text = "MIT License" }
 classifiers = [
     "Programming Language :: Python :: 3",
