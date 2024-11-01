@@ -1,3 +1,4 @@
+import doctest
 import platform
 import os
 import tempfile
@@ -5,7 +6,9 @@ import logging
 from typing import Union, List
 import fire
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
 
 def get_hosts_path() -> str:
@@ -14,10 +17,19 @@ def get_hosts_path() -> str:
     :return: The path to the hosts file.
     """
     system = platform.system()
-    return r"C:\Windows\System32\drivers\etc\hosts" if system == "Windows" else "/etc/hosts"
+    return (
+        r"C:\Windows\System32\drivers\etc\hosts"
+        if system == "Windows"
+        else "/etc/hosts"
+    )
 
 
-class IpUtil(object):
+class PyIpBlocker:
+    """
+    A class for blocking and unblocking IP addresses in the hosts file.
+    :parameter LOOPBACK_IP: The IP address to use as a loopback address. Defaults to "127.0.0.1".
+    """
+
     def __init__(self, LOOPBACK_IP: str = "127.0.0.1"):
         self._LOOPBACK_IP = LOOPBACK_IP
 
@@ -29,6 +41,11 @@ class IpUtil(object):
             lines (List[str], optional): The lines of the hosts file. Defaults to None.
         Returns:
             bool: True if the IP address is blocked, False otherwise.
+
+        Example:
+            >>> ip_manager = PyIpBlocker()
+            >>> ip_manager.is_ip_blocked("127.0.0.1")
+            False
         """
         entry = f"{self._LOOPBACK_IP} {ip}"
         if lines is None:
@@ -43,6 +60,15 @@ class IpUtil(object):
             target (Union[str, List[str]]): The IP address or list of IP addresses to block.
         Returns:
             List[str]: A list of blocked IP addresses.
+
+        Example:
+            >>> ip_manager = PyIpBlocker()
+            >>> ip_manager.block_ip("127.0.0.1")
+            ['127.0.0.1']
+            >>> ip_manager.block_ip(["127.0.0.2", "google.com"])
+            ['127.0.0.2', 'google.com']
+            >>> ip_manager.unblock_ip(['127.0.0.1','127.0.0.2', 'google.com'])
+            ['127.0.0.1', '127.0.0.2', 'google.com']
         """
         if isinstance(target, str):
             target = [target]
@@ -73,6 +99,15 @@ class IpUtil(object):
             list_of_target (Union[str, List[str]]): The IP address or list of IP addresses to unblock.
         Returns:
             List[str]: A list of unblocked IP addresses.
+
+        Example:
+            >>> ip_manager = PyIpBlocker()
+            >>> ip_manager.unblock_ip("127.0.0.1")
+            []
+            >>> ip_manager.block_ip("127.0.0.1")
+            ['127.0.0.1']
+            >>> ip_manager.unblock_ip(["127.0.0.1", "google.com"])
+            ['127.0.0.1']
         """
         if isinstance(list_of_target, str):
             list_of_target = [list_of_target]
@@ -85,7 +120,9 @@ class IpUtil(object):
             # Use a temporary file to avoid partial writes
             with tempfile.NamedTemporaryFile("w", delete=False) as temp_file:
                 for line in lines:
-                    if not any(f"{self._LOOPBACK_IP} {ip}" in line for ip in list_of_target):
+                    if not any(
+                        f"{self._LOOPBACK_IP} {ip}" in line for ip in list_of_target
+                    ):
                         temp_file.write(line)
                     else:
                         for ip in list_of_target:
@@ -104,4 +141,4 @@ class IpUtil(object):
 
 
 if __name__ == "__main__":
-    fire.Fire(IpUtil)
+    doctest.testmod()

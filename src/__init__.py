@@ -1,9 +1,7 @@
-from PyIpUtil import IpUtil
+from PyIpBlocker import PyIpBlocker
 
-__version__ = "0.0.2"
+__version__ = "0.0.4"
 
 __author__ = "ZachVFX"
 
 __license__ = "MIT License"
-
-

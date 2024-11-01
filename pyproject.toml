@@ -3,23 +3,20 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "PyIpUtil"
-version = "0.0.3"
+name = "PyIpBlocker"
+version = "0.0.4"
 authors = [
   { name="ZachVFX", email="zachallrd@gmail.com" },
 ]
-description = "A small package for block and unblock ip in python, with a CLI in options."
+description = "A small package for block and unblock ip in python"
 readme = "README.md"
 requires-python = ">=3.8"
-keywords = ["IpUtil", "Ip", "Block", "Unblock", "CLI", "utility"]
+keywords = ["IpUtil", "Ip", "Block", "Unblock", "utility", "Blocker"]
 license = { text = "MIT License" }
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
-]
-dependencies = [
-  "fire",
 ]
 
 [project.urls]
